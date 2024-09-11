@@ -1,4 +1,4 @@
-package com.riwi.complexus.infrastructure.services.CRUD;
+package com.riwi.complexus.infrastructure.abstract_services.CRUD;
 
 import java.util.List;
 
