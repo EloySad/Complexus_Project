@@ -1,5 +1,8 @@
 package com.riwi.complexus.infrastructure.abstract_services.interfaces;
 
-public interface IResidentialService {
+import com.riwi.complexus.infrastructure.abstract_services.CRUD.Create;
 
+public interface IResidentialService extends
+        Create<>,
+        {
 }
