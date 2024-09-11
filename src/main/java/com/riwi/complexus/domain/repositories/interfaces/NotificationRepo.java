@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.riwi.complexus.domain.entities.NotificationEntity;
 
 @Repository
-public interface NotificationRepo extends JpaRepository<NotificationEntity, Integer>{
+public interface NotificationRepo extends JpaRepository<NotificationEntity, Long>{
 }
