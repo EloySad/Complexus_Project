@@ -14,7 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationResponse {
-    private Long id; 
+    private Long id;
     private String message;
     private LocalDateTime date;
+    private Long residentId;
+    private Long adminId;
+    private Long adviceId;
 }

@@ -20,7 +20,7 @@ public class AdviceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(length = 50, nullable = false)
     private String title;
@@ -36,8 +36,8 @@ public class AdviceEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "author_user_id")
-    private long authorUser;
+    @JoinColumn(name = "author_resident_id")
+    private long authorResident;
 
 
     @ManyToOne

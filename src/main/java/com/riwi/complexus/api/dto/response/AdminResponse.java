@@ -1,7 +1,6 @@
 package com.riwi.complexus.api.dto.response;
 
 import com.riwi.complexus.utils.enums.RolsAdmin;
-import jakarta.persistence.*;
 import lombok.*;
 
 @Getter

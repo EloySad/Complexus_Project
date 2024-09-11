@@ -19,4 +19,7 @@ public class ReactionResponse {
     private Long id;
     private TypeReaction type;
     private LocalDateTime reactionDate;
+    private Long residentId;
+    private Long adminId;
+    private Long adviceId; 
 }
