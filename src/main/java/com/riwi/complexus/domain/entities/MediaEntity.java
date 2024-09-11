@@ -17,7 +17,7 @@ public class MediaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "media_1", length = 300)
     private String media1;
