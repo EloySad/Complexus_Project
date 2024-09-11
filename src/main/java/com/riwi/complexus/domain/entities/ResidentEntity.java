@@ -1,23 +1,22 @@
 package com.riwi.complexus.domain.entities;
 
-import com.riwi.complexus.utils.enums.RolsAdmin;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "Admins")
+@Table(name = "Users")
 @Getter
-@Builder
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AdminEntity {
+public class ResidentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_admin")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "name")
@@ -35,25 +34,24 @@ public class AdminEntity {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "role")
-    private RolsAdmin role;
+    @Column(name = "tower")
+    private Integer tower;
 
-    // Relación uno a muchos con Advice
-    @OneToMany(mappedBy = "admin")
-    private List<AdviceEntity> advices;
+    @Column(name = "apto")
+    private Integer apto;
+
+    // Relación muchos a uno con ResidentialUnit
+    @ManyToOne
+    @JoinColumn(name = "residential_id")
+    private ResidentialUnitEntity residentialUnit;
 
     // Relación uno a muchos con Notification
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "user")
     private List<NotificationEntity> notifications;
 
     // Relación uno a muchos con Reaction
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "user")
     private List<ReactionEntity> reactions;
-
-    // Relación uno a muchos con ResidentialUnit
-    @OneToMany(mappedBy = "admin")
-    private List<ResidentialUnitEntity> residentialUnits;
-
 
 
 }
