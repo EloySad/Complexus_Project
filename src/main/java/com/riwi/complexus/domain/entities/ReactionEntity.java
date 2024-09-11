@@ -34,7 +34,7 @@ public class ReactionEntity {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private UserEntity user;
+    private ResidentEntity user;
 
     @ManyToOne
     @JoinColumn(nullable = false)
