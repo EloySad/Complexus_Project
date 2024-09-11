@@ -32,7 +32,7 @@ public class NotificationEntity {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Long user;
+    private Long resident;
 
     @ManyToOne
     @JoinColumn(nullable = false)

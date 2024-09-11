@@ -16,7 +16,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReactionRequest {
-    private Long id; 
     private TypeReaction type;
     private LocalDateTime reactionDate;
 }

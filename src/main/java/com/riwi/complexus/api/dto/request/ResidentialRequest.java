@@ -1,7 +1,6 @@
 package com.riwi.complexus.api.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import java.util.List;
 
 @Getter
 @Setter
