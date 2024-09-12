@@ -2,6 +2,7 @@ package com.riwi.complexus.domain.entities;
 
 import com.riwi.complexus.utils.enums.RolsAdmin;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class AdminEntity {
     private String lastname;
 
     @Column(name = "email")
+    @Email
     private String email;
 
     @Column(name = "password")
