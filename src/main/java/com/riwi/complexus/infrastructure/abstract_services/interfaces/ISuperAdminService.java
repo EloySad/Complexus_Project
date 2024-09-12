@@ -4,7 +4,7 @@ import com.riwi.complexus.domain.entities.AdminEntity;
 import com.riwi.complexus.infrastructure.abstract_services.CRUD.*;
 
 public interface ISuperAdminService extends
-        Create<AdminEntity>,
+        Create<AdminEntity,AdminEntity>,
         Delete<Long>,
         Update<AdminEntity, Long>,
         ReadById<AdminEntity, Long>,
