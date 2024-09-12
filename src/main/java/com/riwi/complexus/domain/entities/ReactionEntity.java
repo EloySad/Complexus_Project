@@ -27,6 +27,8 @@ public class ReactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private TypeReaction type;
 
     @Column(nullable = false)
