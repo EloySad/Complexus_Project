@@ -1,6 +1,7 @@
 package com.riwi.complexus.domain.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class ResidentEntity {
     private String lastname;
 
     @Column(name = "email")
+    @Email
     private String email;
 
     @Column(name = "password")

@@ -1,5 +1,6 @@
 package com.riwi.complexus.domain.entities;
 
+import com.riwi.complexus.utils.enums.TypeCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,8 +46,12 @@ public class AdviceEntity {
     private long authorAdmin;
 
 
-    @OneToMany(mappedBy = "advice", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "advice", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MediaEntity> media;
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private CategoryEntity category;
 
 
 

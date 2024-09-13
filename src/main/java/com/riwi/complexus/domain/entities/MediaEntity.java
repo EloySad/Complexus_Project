@@ -34,6 +34,7 @@ public class MediaEntity {
     @Column(name = "media_5", length = 300)
     private String media5;
 
+
     @ManyToOne
     @JoinColumn(name = "advice_id", nullable = false)
     private AdviceEntity advice;

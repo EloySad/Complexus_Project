@@ -25,21 +25,25 @@ public class NotificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(nullable = false, length = 255)
     private String message;
     
     private LocalDateTime date;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long resident;
+    @Column(nullable = false)
+    private Boolean archived;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long admin; 
+    @JoinColumn(name = "resident_id", nullable = false)
+    private ResidentEntity resident;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Long advice;
+    @JoinColumn(name = "admin_id", nullable = false)
+    private AdminEntity admin;
+
+    @ManyToOne
+    @JoinColumn(name = "advice_id", nullable = false)
+    private AdviceEntity advice;
     
 }
