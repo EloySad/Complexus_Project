@@ -38,9 +38,7 @@ public class NotificationService implements INotificationService{
 
     @Override
     public String archive(Long id) {
-        NotificationEntity notification = findById(id);
-        notification.setArchived(true);
-        notificationRepository.save(notification);
-        return "Notification archived successfully";
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'archive'");
     }
 }
