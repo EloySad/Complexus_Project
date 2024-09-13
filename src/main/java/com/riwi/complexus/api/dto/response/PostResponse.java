@@ -10,7 +10,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdviceResponse {
+public class PostResponse {
     private String title;
     private String description;
     private Boolean status;
