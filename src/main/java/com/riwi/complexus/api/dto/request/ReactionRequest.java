@@ -2,8 +2,6 @@ package com.riwi.complexus.api.dto.request;
 
 import java.time.LocalDateTime;
 
-import com.riwi.complexus.utils.enums.TypeReaction;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReactionRequest {
-    private TypeReaction type;
-    private LocalDateTime reactionDate;
+    private Boolean liked;
+    private LocalDateTime createdAt;
 }
