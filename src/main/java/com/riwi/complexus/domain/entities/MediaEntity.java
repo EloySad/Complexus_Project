@@ -19,23 +19,15 @@ public class MediaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "media_1", length = 300)
-    private String media1;
-
-    @Column(name = "media_2", length = 300)
-    private String media2;
-
-    @Column(name = "media_3", length = 300)
-    private String media3;
-
-    @Column(name = "media_4", length = 300)
-    private String media4;
-
-    @Column(name = "media_5", length = 300)
-    private String media5;
-
+    @Column(nullable = false, length = 255)
+    private String url;
 
     @ManyToOne
-    @JoinColumn(name = "advice_id", nullable = false)
-    private AdviceEntity advice;
+    @JoinColumn(name = "post_id", nullable = false)
+    private PostEntity post;
+
+
+
+
+
 }

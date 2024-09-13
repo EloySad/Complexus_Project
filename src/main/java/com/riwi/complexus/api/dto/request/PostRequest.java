@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdviceRequest {
+public class PostRequest {
     private String title;
     private String description;
     private Boolean status;
