@@ -1,7 +1,5 @@
 package com.riwi.complexus.api.dto.request;
 
-import java.time.LocalDateTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +11,8 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NotificationRequest {
-    private String message; 
-    private LocalDateTime createdAt;
+public class User_notificationsRequest {
+    private Boolean seen; 
+    private Boolean archived; 
+    
 }
