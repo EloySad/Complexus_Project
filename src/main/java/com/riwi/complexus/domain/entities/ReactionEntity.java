@@ -2,8 +2,6 @@ package com.riwi.complexus.domain.entities;
 
 import java.time.LocalDateTime;
 
-import com.riwi.complexus.utils.enums.TypeReaction;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,20 +27,16 @@ public class ReactionEntity {
     private Long id;
 
     @Column(nullable = false)
-    private TypeReaction type;
+    private Boolean liked;
 
     @Column(nullable = false)
-    private LocalDateTime reaccionDate;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private ResidentEntity resident;
+    private Long postId;
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private AdminEntity admin;
-
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private AdviceEntity advice;
+    private Long userId;
 }
