@@ -1,6 +1,5 @@
 package com.riwi.complexus.infrastructure.services;
 
-import com.riwi.complexus.api.dto.request.UserRequest;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.repositories.interfaces.UserRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IUserService;
@@ -34,7 +33,22 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ResponseEntity<UserEntity> update(UserEntity userEntity, Long id) {
+    public ResponseEntity<UserEntity> create(UserEntity entity) {
+        UserEntity user = UserEntity.builder()
+                .name(entity.getName())
+                .lastname(entity.getLastname())
+                .email(entity.getEmail())
+                .password(entity.getPassword())
+                .phone(entity.getPhone())
+                .role(entity.getRole())
+                .build();
+
+        UserEntity saveUser = userRepo.save(user);
+        return ResponseEntity.status(HttpStatus.OK).body(saveUser);
+    }
+
+    @Override
+    public ResponseEntity<UserEntity> update(Long id, UserEntity userEntity) {
         UserEntity userExisting = userRepo.findById(id).orElse(null);
         if(userExisting != null){
             userExisting.setName(userEntity.getName());
@@ -49,20 +63,5 @@ public class UserService implements IUserService {
         }else{
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @Override
-    public ResponseEntity<UserEntity> create(UserEntity entity) {
-        UserEntity user = UserEntity.builder()
-                .name(entity.getName())
-                .lastname(entity.getLastname())
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .phone(entity.getPhone())
-                .role(entity.getRole())
-                .build();
-
-        UserEntity saveUser = userRepo.save(user);
-        return ResponseEntity.status(HttpStatus.OK).body(saveUser);
     }
 }

@@ -1,7 +1,7 @@
 package com.riwi.complexus.api.controllers;
 
-import com.riwi.complexus.api.controllers.interfacesController.IUserController;
 import com.riwi.complexus.domain.entities.UserEntity;
+import com.riwi.complexus.infrastructure.abstract_services.interfaces.IUserService;
 import com.riwi.complexus.infrastructure.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UserController implements IUserController {
+public class UserController implements IUserService {
 
     @Autowired
     private UserService userService;
@@ -43,6 +43,6 @@ public class UserController implements IUserController {
     @Override
     @PutMapping("update/{id}")
     public ResponseEntity<UserEntity> update(@PathVariable Long id,@RequestBody UserEntity user) {
-        return userService.update(user, id);
+        return userService.update(id, user);
     }
 }
