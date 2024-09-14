@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
-@Entity(name = "user_entity")
+@Entity(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,5 +31,6 @@ public class UserEntity {
     @Column(nullable = false, length = 40)
     private String phone;
 
+    @Column(nullable = false)
     private String role;
 }

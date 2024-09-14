@@ -1,5 +1,7 @@
 package com.riwi.complexus.api.controllers.generic;
 
-public interface Update<Entity, ID> {
-    public Entity update (Entity entity);
+import org.springframework.http.ResponseEntity;
+
+public interface Update<ID, Entity> {
+    public ResponseEntity<Entity> update (ID id, Entity entity);
 }

@@ -42,6 +42,7 @@ public class UserService implements IUserService {
             userExisting.setEmail(userEntity.getEmail());
             userExisting.setPassword(userEntity.getPassword());
             userExisting.setPhone(userEntity.getPhone());
+            userExisting.setRole(userEntity.getRole());
 
             UserEntity saveUser = userRepo.save(userExisting);
             return ResponseEntity.ok(saveUser);

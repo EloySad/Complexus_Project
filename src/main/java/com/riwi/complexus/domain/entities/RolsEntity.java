@@ -3,7 +3,7 @@ package com.riwi.complexus.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "rol_entity")
+@Entity(name = "roles")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
