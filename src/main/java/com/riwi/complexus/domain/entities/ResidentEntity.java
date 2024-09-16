@@ -1,10 +1,7 @@
 package com.riwi.complexus.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity(name = "residents")
 @Data
@@ -29,4 +26,8 @@ public class ResidentEntity {
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity userId;
+
+    @ManyToOne
+    @JoinColumn(name = "residential_unit_id")
+    private ResidentialUnitEntity residentialUnitId;
 }
