@@ -1,5 +1,7 @@
 package com.riwi.complexus.infrastructure.abstract_services.CRUD;
 
-public interface Create<EntityRequest ,Entity> {
-    public Entity create(EntityRequest entity);
+import org.springframework.http.ResponseEntity;
+
+public interface Create <Entity> {
+    public ResponseEntity<Entity> create(Entity entity);
 }

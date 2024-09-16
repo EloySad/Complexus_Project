@@ -9,6 +9,7 @@ public class ComplexusApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ComplexusApplication.class, args);
+		System.out.println("Complexus");
 	}
 
 }
