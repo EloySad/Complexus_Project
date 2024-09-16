@@ -39,8 +39,8 @@ public class PostEntity {
         private List<MediaEntity> media;
 
         @ManyToOne
-        @JoinColumn(name = "user_id", nullable = false)
-        private Long user;
+        @JoinColumn(name = "resident_id", nullable = false)
+        private Long resident;
 
 
     }

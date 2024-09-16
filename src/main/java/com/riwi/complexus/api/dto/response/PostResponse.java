@@ -11,14 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostResponse {
+    private Long id;
     private String title;
     private String description;
-    private Boolean status;
-    private LocalDateTime createDate;
-    private Long authorResidentId;
-    private Long authorAdminId;
-    private Long categoryId;
-    private Long mediaId;
-    private List<String> mediaUrls;
+    private boolean pinned;
+    private LocalDateTime createdAt;
+    private Long userId;
+    private List<MediaResponse> media;
 
 }
