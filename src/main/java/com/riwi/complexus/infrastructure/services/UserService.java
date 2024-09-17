@@ -23,21 +23,18 @@ public class UserService implements IUserService {
 
     @Override
     public ResponseEntity<UserEntity> createDTO(UserRequest entity) {
-        // Buscar el rol por su ID
         RolsEntity rol = rolService.readById(entity.getRoleId());
-
         if (rol == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        // Crear la entidad UserEntity y asignarle el rol encontrado
         UserEntity user = UserEntity.builder()
                 .name(entity.getName())
                 .lastname(entity.getLastname())
                 .email(entity.getEmail())
                 .password(entity.getPassword())
                 .phone(entity.getPhone())
-                .role(rol)  // Aquí se asigna la entidad RolsEntity completa
+                .role(rol)
                 .build();
 
         UserEntity savedUser = userRepo.save(user);
@@ -60,23 +57,23 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ResponseEntity<UserEntity> update(Long id, UserEntity userRequest) {
+    public ResponseEntity<UserEntity> update(Long id, UserRequest userRequest) {
+        RolsEntity rol = rolService.readById(userRequest.getRoleId());
+        if (rol == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
         UserEntity userExisting = userRepo.findById(id).orElse(null);
 
         if (userExisting == null) {
             return ResponseEntity.notFound().build();
         }
-        RolsEntity rol = rolService.readById(userRequest.getId());
 
-        if (rol == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body (null);
-        }
         userExisting.setName(userRequest.getName());
         userExisting.setLastname(userRequest.getLastname());
         userExisting.setEmail(userRequest.getEmail());
         userExisting.setPassword(userRequest.getPassword());
         userExisting.setPhone(userRequest.getPhone());
-        userExisting.setRole(rol);  // Asignar el rol
+        userExisting.setRole(rol);
 
         UserEntity updatedUser = userRepo.save(userExisting);
         return ResponseEntity.ok(updatedUser);

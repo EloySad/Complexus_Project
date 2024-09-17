@@ -28,5 +28,5 @@ public class UserRequest {
     private String phone;
 
     @NotNull(message = "Role id is required")
-    private Long roleId;  // Solo se recibe el ID del rol
+    private Long roleId;
 }

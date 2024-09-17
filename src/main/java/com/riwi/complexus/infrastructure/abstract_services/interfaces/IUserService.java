@@ -10,5 +10,5 @@ public interface IUserService extends
         Delete<Long>,
         ReadAll<UserEntity>,
         ReadById<UserEntity, Long>,
-        Update<UserEntity, Long> {
+        UpdateDTO<UserEntity, Long,UserRequest> {
 }

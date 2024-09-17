@@ -18,6 +18,6 @@ public class RolsEntity {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "role") // One-to-Many relationship with UserEntity
+    @OneToMany(mappedBy = "role")
     private Set<UserEntity> users;
 }
