@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MediaService implements IMediaService {
@@ -18,7 +19,7 @@ public class MediaService implements IMediaService {
     private MediaRepo mediaRepository;
 
     @Override
-    public ResponseEntity<MediaEntity> createDTO(MediaRequest request) {
+    public MediaEntity createDTO(MediaRequest request) {
         MediaEntity media = new MediaEntity();
         media.setUrl(request.getUrl());
         return mediaRepository.save(media);
@@ -34,7 +35,7 @@ public class MediaService implements IMediaService {
         List<MediaEntity> mediaEntities = mediaRepository.findAll();
         return mediaEntities.stream()
                 .map(this::mapToDto)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -45,10 +46,10 @@ public class MediaService implements IMediaService {
     }
 
     @Override
-    public MediaResponse update(Long id, MediaRequest request) {
+    public MediaResponse update(Long id, MediaEntity media) {
         MediaEntity existingMedia = mediaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Media not found"));
-        existingMedia.setUrl(request.getUrl());
+        existingMedia.setUrl(media.getUrl());
         MediaEntity updatedMedia = mediaRepository.save(existingMedia);
         return mapToDto(updatedMedia);
     }
@@ -58,5 +59,11 @@ public class MediaService implements IMediaService {
                 .id(media.getId())
                 .url(media.getUrl())
                 .build();
+    }
+
+
+    @Override
+    public ResponseEntity<MediaRequest> update(Long aLong, MediaRequest mediaRequest) {
+        return null;
     }
 }

@@ -24,7 +24,7 @@ public class MediaController {
 
     @PostMapping
     public ResponseEntity<MediaResponse> createMedia(@RequestBody MediaRequest mediaRequest) {
-        MediaEntity createdMedia = mediaService.createDTO(mediaRequest, createdMedia);
+        MediaEntity createdMedia = mediaService.createDTO(mediaRequest);
         MediaResponse response = mediaService.readById(createdMedia.getId());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -43,7 +43,10 @@ public class MediaController {
 
     @PutMapping("/{id}")
     public ResponseEntity<MediaResponse> updateMedia(@PathVariable Long id, @RequestBody MediaRequest mediaRequest) {
-        MediaResponse response = mediaService.update(id, MediaEntity);
+        MediaEntity media = new MediaEntity();
+        media.setId(id);
+        media.setUrl(mediaRequest.getUrl());
+        MediaResponse response = mediaService.update(id, media);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
