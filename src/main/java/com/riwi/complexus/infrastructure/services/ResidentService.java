@@ -1,5 +1,6 @@
 package com.riwi.complexus.infrastructure.services;
 
+import com.riwi.complexus.api.dto.request.ResidentDto;
 import com.riwi.complexus.domain.entities.ResidentEntity;
 import com.riwi.complexus.domain.entities.ResidentialUnitEntity;
 import com.riwi.complexus.domain.entities.UserEntity;
@@ -45,13 +46,16 @@ public class ResidentService implements IResidentService {
     }
 
     @Override
-    public ResponseEntity<ResidentEntity> create(ResidentEntity entity) {
-
-        UserEntity user = userRepo.findById(entity.getUserId().getId())
-                .orElseThrow(() -> new RuntimeException("User Not Found"));
-
+    public ResponseEntity<ResidentDto> create(ResidentDto entity) {
+        // 1. Check if residential unit exists
         ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId().getId())
                 .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
+        // 2. Create user
+
+        // 3. Create resident with the created user
+        // createdResident.setUser(createdUser)
+
+
 
         ResidentEntity resident = ResidentEntity.builder()
                 .tower(entity.getTower())

@@ -39,7 +39,7 @@ public class UserService implements IUserService {
 
     @Override
     public ResponseEntity<UserEntity> create(UserEntity entity) {
-
+entity.
         RolsEntity role = rolRepo.findById(entity.getRole().getId())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 

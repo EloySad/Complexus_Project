@@ -1,9 +1,11 @@
 package com.riwi.complexus.api.controllers;
 
+import com.riwi.complexus.api.dto.request.ResidentDto;
 import com.riwi.complexus.domain.entities.ResidentEntity;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentService;
 import com.riwi.complexus.infrastructure.services.ResidentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class ResidentController implements IResidentService {
 
     @Override
     @PostMapping("/create")
-    public ResponseEntity<ResidentEntity> create(ResidentEntity user) {
+    public ResponseEntity<ResidentDto> create(@Valid @RequestBody ResidentDto user) {
 
         return residentService.create(user);
     }
