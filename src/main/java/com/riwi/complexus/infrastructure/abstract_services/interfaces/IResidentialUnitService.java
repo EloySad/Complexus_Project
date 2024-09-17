@@ -10,5 +10,5 @@ public interface IResidentialUnitService extends
         Delete<Long>,
         ReadAll<ResidentialUnitEntity>,
         ReadById<ResidentialUnitEntity, Long>,
-        Update<ResidentialUnitEntity, Long> {
+        UpdateDTO<ResidentialUnitEntity, Long,ResidentialUnitRequest> {
 }
