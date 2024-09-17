@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResidentialUnitRequest {
 
-        @NotNull(message = "El nombre es obligatorio")
+        @NotNull(message = "name cannot be null and void")
         private String name;
 
-        @NotNull(message = "La ciudad es obligatoria")
+        @NotNull(message = "city cannot be null and void")
         private String city;
 
-        @NotNull(message = "La dirección es obligatoria")
+        @NotNull(message = "adress cannot be null and void")
         private String adress;
 
-        @NotBlank(message = "El ID del usuario es obligatorio")
+        @NotBlank(message = "id user cannot be null and void")
         private Long userId;
 }
