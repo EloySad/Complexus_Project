@@ -1,13 +1,14 @@
 package com.riwi.complexus.infrastructure.abstract_services.interfaces;
 
+import com.riwi.complexus.api.dto.request.MediaRequest;
+import com.riwi.complexus.api.dto.response.MediaResponse;
 import com.riwi.complexus.domain.entities.MediaEntity;
-import com.riwi.complexus.infrastructure.abstract_services.CRUD.Archive;
+import com.riwi.complexus.infrastructure.abstract_services.CRUD.*;
 
-import java.util.List;
-
-public interface IMediaService extends Archive<Long> {
-    MediaEntity save(MediaEntity media);
-    MediaEntity findById(Long id);
-    List<MediaEntity> findAll();
-    void deleteById(Long id);
+public interface IMediaService extends
+        CreateDTO<MediaEntity, MediaRequest>,
+        Delete<Long>,
+        ReadAll<MediaResponse>,
+        ReadById<MediaResponse, Long>,
+        Update<MediaRequest, Long> {
 }

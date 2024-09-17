@@ -18,7 +18,6 @@ import java.util.List;
 @SuperBuilder
 public class PostEntity {
 
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -29,7 +28,7 @@ public class PostEntity {
         @Column(columnDefinition = "TEXT")
         private String description;
 
-        @Column(name = "created_at")
+        @Column(name = "created_at", nullable = false)
         private LocalDateTime createdAt;
 
         @Column(name = "pinned", nullable = false)
@@ -39,8 +38,8 @@ public class PostEntity {
         private List<MediaEntity> media;
 
         @ManyToOne
-        @JoinColumn(name = "resident_id", nullable = false)
-        private Long resident;
+        @JoinColumn(name = "user_id", nullable = false)
+        private Long user;
 
+}
 
-    }

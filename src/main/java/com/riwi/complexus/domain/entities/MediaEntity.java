@@ -25,9 +25,4 @@ public class MediaEntity {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
-
-
-
-
-
 }
