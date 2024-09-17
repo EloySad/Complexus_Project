@@ -47,7 +47,7 @@ public class ResidentialUnitController implements IResidentialUnitService {
 
     @Override
     @PutMapping("/update/{id}")
-    public ResponseEntity<ResidentialUnitEntity> update(@PathVariable Long id,@RequestBody ResidentialUnitEntity residentialUnitEntity) {
-        return residentialUnitService.update(id, residentialUnitEntity);
+    public ResponseEntity<ResidentialUnitEntity> update(@PathVariable Long id,@RequestBody ResidentialUnitRequest residentialUnitRequest) {
+        return residentialUnitService.update(id, residentialUnitRequest);
     }
 }
