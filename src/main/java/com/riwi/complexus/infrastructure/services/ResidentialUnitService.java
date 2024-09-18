@@ -33,7 +33,7 @@ public class ResidentialUnitService implements IResidentialUnitService {
         ResidentialUnitEntity residentialUnit = ResidentialUnitEntity.builder()
                 .name(residentialUnitDTO.getName())
                 .city(residentialUnitDTO.getCity())
-                .adress(residentialUnitDTO.getAdress())
+                .address(residentialUnitDTO.getAdress())
                 .user(user)
                 .build();
 
@@ -66,7 +66,7 @@ public class ResidentialUnitService implements IResidentialUnitService {
         if(residentialUnitExisting != null){
             residentialUnitExisting.setName(residentialUnitRequest.getName());
             residentialUnitExisting.setCity(residentialUnitRequest.getCity());
-            residentialUnitExisting.setAdress(residentialUnitRequest.getAdress());
+            residentialUnitExisting.setAddress(residentialUnitRequest.getAdress());
             residentialUnitExisting.setUser(user);
 
             ResidentialUnitEntity residentialUnit = residentialUnitRepo.save(residentialUnitExisting);
