@@ -32,6 +32,6 @@ public class UserEntity {
     private String phone;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "roles_id", nullable = false) // Explicitly specify column name
+    @JoinColumn(name = "roles_id", nullable = false)
     private RolsEntity role;
 }

@@ -26,7 +26,7 @@ public class ResidentialUnitService implements IResidentialUnitService {
         UserEntity user = userService.readById(residentialUnitDTO.getUserId());
 
         if (user == null) {
-            throw new RuntimeException("Usuario no encontrado");
+            throw new RuntimeException("User not found");
         }
 
         // Crear la entidad ResidentialUnitEntity
@@ -57,13 +57,17 @@ public class ResidentialUnitService implements IResidentialUnitService {
     }
 
     @Override
-    public ResponseEntity<ResidentialUnitEntity> update(Long id, ResidentialUnitEntity residentialUnitEntity) {
+    public ResponseEntity<ResidentialUnitEntity> update(Long id, ResidentialUnitRequest residentialUnitRequest) {
         ResidentialUnitEntity residentialUnitExisting = residentialUnitRepo.findById(id).orElse(null);
+        UserEntity user = userService.readById(residentialUnitRequest.getUserId());
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
         if(residentialUnitExisting != null){
-            residentialUnitExisting.setName(residentialUnitEntity.getName());
-            residentialUnitExisting.setCity(residentialUnitEntity.getCity());
-            residentialUnitExisting.setAdress(residentialUnitEntity.getAdress());
-            residentialUnitExisting.setUser(residentialUnitEntity.getUser());
+            residentialUnitExisting.setName(residentialUnitRequest.getName());
+            residentialUnitExisting.setCity(residentialUnitRequest.getCity());
+            residentialUnitExisting.setAdress(residentialUnitRequest.getAdress());
+            residentialUnitExisting.setUser(user);
 
             ResidentialUnitEntity residentialUnit = residentialUnitRepo.save(residentialUnitExisting);
             return ResponseEntity.ok(residentialUnit);
