@@ -1,45 +1,31 @@
 package com.riwi.complexus.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity
-@Table(name = "ResidentialUnit")
-@Getter
-@Builder
-@Setter
+@Entity(name = "residential_unit")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ResidentialUnitEntity {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_unit")
     private Long id;
 
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "city")
+    @Column(nullable = false)
     private String city;
 
-    @Column(name = "address")
-    private String address;
+    @Column(nullable = false)
+    private String adress;
 
-    @Column(name = "has_tower")
-    private Boolean hasTower;
-
-    // Relación muchos a uno con Admin
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private AdminEntity admin;
-
-    // Relación uno a muchos con User
-    @OneToMany(mappedBy = "residentialUnit")
-    private List<ResidentEntity> users;
-
-
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 }
