@@ -4,5 +4,5 @@ import com.riwi.complexus.domain.entities.ResidentialUnitEntity;
 import com.riwi.complexus.domain.entities.RolsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RolRepo extends JpaRepository<RolsEntity, Long> {
+public interface RolRepo extends JpaRepository <RolsEntity, Long> {
 }

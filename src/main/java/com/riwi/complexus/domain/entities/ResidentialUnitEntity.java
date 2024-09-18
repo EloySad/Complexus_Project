@@ -22,9 +22,10 @@ public class ResidentialUnitEntity {
     @Column(nullable = false)
     private String city;
 
-    @Column(nullable = false)
-    private String adress;
 
+    @Column(nullable = false)
+    private String address;
+    
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
