@@ -7,6 +7,7 @@ import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentS
 import com.riwi.complexus.infrastructure.services.ResidentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/resident")
-public class ResidentController implements IResidentService {
+public class ResidentController{
 
     @Autowired
     private ResidentService residentService;
@@ -25,27 +26,23 @@ public class ResidentController implements IResidentService {
         return residentService.readById(id);
     }
 
-    @Override
     @PostMapping("/create")
     public ResponseEntity<ResidentDto> create(@Valid @RequestBody ResidentDto user) {
 
-        return residentService.create(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(residentService.create(user));
     }
 
-    @Override
     @DeleteMapping("/delete")
     public void delete(Long id) {
         residentService.delete(id);
     }
 
-    @Override
     @GetMapping("/readAll")
     public List<ResidentEntity> readAll() {
 
         return residentService.readAll();
     }
 
-    @Override
     @PutMapping("update/{id}")
     public ResponseEntity<ResidentEntity> update(@PathVariable Long id,@RequestBody ResidentEntity resident) {
         return residentService.update(id, resident);

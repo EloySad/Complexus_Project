@@ -5,7 +5,6 @@ import com.riwi.complexus.domain.entities.ResidentEntity;
 import com.riwi.complexus.infrastructure.abstract_services.CRUD.*;
 
 public interface IResidentService extends
-        Create<ResidentDto>,
         Delete<Long>,
         ReadAll<ResidentEntity>,
         ReadById<ResidentEntity, Long>,

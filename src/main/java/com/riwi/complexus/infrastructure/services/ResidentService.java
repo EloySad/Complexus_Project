@@ -51,16 +51,13 @@ public class ResidentService implements IResidentService {
                 .orElseThrow(()-> new RuntimeException("Resident Not Found"));
     }
 
-    @Override
-    public ResponseEntity<ResidentDto> create(@Valid ResidentDto entity) {
+    public ResidentDto create(@Valid ResidentDto entity) {
         // 1. Check if residential unit exists
-        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId())
+        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId().getId())
                 .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
         // 2. Create user
-        RolsEntity rol = rolService.readById(entity.getRole());
-        if (rol == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
+
+        RolsEntity rol = rolService.readById(entity.getRole().getId());
 
         UserEntity newUser = UserEntity.builder()
                 .name(entity.getName())
@@ -74,7 +71,6 @@ public class ResidentService implements IResidentService {
         UserEntity createNewUser = userRepo.save(newUser);
 
         // 3. Create resident with the created user
-        // clue:createdResident.setUser(createdUser)
 
         ResidentEntity newResident = ResidentEntity.builder()
                 .tower(entity.getTower())
@@ -85,6 +81,20 @@ public class ResidentService implements IResidentService {
                 .build();
 
         ResidentEntity createdResident = residentRepo.save(newResident);
+
+        ResidentDto residentDto = ResidentDto.builder()
+                .name(newUser.getName())
+                .lastname(newUser.getLastname())
+                .email(newUser.getEmail())
+                .password(newUser.getPassword())
+                .phone(newUser.getPhone())
+                .role(newUser.getRole())
+                .tower(newResident.getTower())
+                .residentialNumber(newResident.getResidentialNumber())
+                .residentialUnitId(newResident.getResidentialUnitId())
+                .build();
+
+        return residentDto;
     }
 
     @Override

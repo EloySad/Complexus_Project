@@ -1,5 +1,7 @@
 package com.riwi.complexus.api.dto.request;
 
+import com.riwi.complexus.domain.entities.ResidentialUnitEntity;
+import com.riwi.complexus.domain.entities.RolsEntity;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -31,7 +33,7 @@ public class ResidentDto {
     private String phone;
 
     @NotBlank
-    private Long role;
+    private RolsEntity role;
 
     @Max(100)
     private String tower;
@@ -41,6 +43,6 @@ public class ResidentDto {
     private String residentialNumber;
 
     @NotBlank
-    private Long residentialUnitId;
+    private ResidentialUnitEntity residentialUnitId;
 
 }
