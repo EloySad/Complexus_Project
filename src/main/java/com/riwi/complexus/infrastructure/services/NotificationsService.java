@@ -9,10 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.riwi.complexus.domain.entities.NotificationsEntity;
+import com.riwi.complexus.domain.entities.PostEntity;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.repositories.NotificationsRepo;
+import com.riwi.complexus.domain.repositories.interfaces.PostRepo;
 import com.riwi.complexus.domain.repositories.interfaces.UserRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.INotificationsService;
+import com.riwi.complexus.utils.exceptions.ResourceNotFoundException;
+import com.riwi.complexus.utils.exceptions.UnauthorizedException;
 
 
 @Service
@@ -24,32 +28,39 @@ public class NotificationsService implements INotificationsService{
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PostRepo postRepo;
+
     @Override
     public ResponseEntity<NotificationsEntity> createPublicationWithNotification(Long adminId, Long postId, String message) {
-        Optional<UserEntity> optionalAdmin = userRepo.findById(adminId);
-        if (!optionalAdmin.isPresent()) {
-            return ResponseEntity.notFound().build();
+        UserEntity admin = userRepo.findById(adminId)
+                .orElseThrow(() -> new ResourceNotFoundException("Admin not found with id " + adminId));
+
+        if (!"admin".equals(admin.getRole().getName())) {
+            throw new UnauthorizedException("User is not an admin");
         }
-        UserEntity admin = optionalAdmin.get();
+
+        PostEntity post = postRepo.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id " + postId));
 
         NotificationsEntity notification = NotificationsEntity.builder()
-            .message(message)
-            .createAt(LocalDateTime.now())
-            .postId(postId)
-            .admin(admin)
-            .build();
+                .message(message)
+                .createAt(LocalDateTime.now())
+                .post(post)
+                .admin(admin)
+                .build();
 
         NotificationsEntity savedNotification = notificationsRepo.save(notification);
 
         List<UserEntity> users = userRepo.findAll();
-
-        for (@SuppressWarnings("unused") UserEntity user : users) {
+        for (UserEntity user : users) {
             NotificationsEntity userNotification = NotificationsEntity.builder()
-                .message(message)
-                .createAt(LocalDateTime.now())
-                .postId(postId)
-                .admin(admin)
-                .build();
+                    .message(message)
+                    .createAt(LocalDateTime.now())
+                    .post(post)
+                    .admin(admin)
+                    .user(user)
+                    .build();
 
             notificationsRepo.save(userNotification);
         }
@@ -57,47 +68,45 @@ public class NotificationsService implements INotificationsService{
         return ResponseEntity.ok(savedNotification);
     }
 
+
     @Override
     public ResponseEntity<NotificationsEntity> create(NotificationsEntity notification) {
         NotificationsEntity savedNotification = notificationsRepo.save(notification);
         return ResponseEntity.ok(savedNotification);
     }
 
-    // @Override
-    // public ResponseEntity<Optional<NotificationsEntity>> findById(Long id) {
-    //     Optional<NotificationsEntity> notification = notificationsRepo.findById(id);
-    //     return ResponseEntity.of(notification); 
-    // }    
-
+    @Override
+    public ResponseEntity<Optional<NotificationsEntity>> findById(Long id) {
+        Optional<NotificationsEntity> notification = notificationsRepo.findById(id);
+        return ResponseEntity.ok(notification);
+    }
 
     @Override
     public ResponseEntity<List<NotificationsEntity>> findAll() {
-        return ResponseEntity.ok(notificationsRepo.findAll());
+        List<NotificationsEntity> notifications = notificationsRepo.findAll();
+        return ResponseEntity.ok(notifications);
     }
 
     @Override
     public ResponseEntity<NotificationsEntity> update(Long id, NotificationsEntity notification) {
-        if (notificationsRepo.existsById(id)) {
-            notification.setId(id);
-            NotificationsEntity updatedNotification = notificationsRepo.save(notification);
-            return ResponseEntity.ok(updatedNotification);
-        }
-        return ResponseEntity.notFound().build();
+        NotificationsEntity existingNotification = notificationsRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id " + id));
+
+        existingNotification.setMessage(notification.getMessage());
+        existingNotification.setCreateAt(notification.getCreateAt());
+        existingNotification.setPost(notification.getPost());
+        existingNotification.setAdmin(notification.getAdmin());
+
+        NotificationsEntity updatedNotification = notificationsRepo.save(existingNotification);
+        return ResponseEntity.ok(updatedNotification);
     }
 
     @Override
     public ResponseEntity<Void> deleteById(Long id) {
-        if (notificationsRepo.existsById(id)) {
-            notificationsRepo.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
+        NotificationsEntity notification = notificationsRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id " + id));
 
-    @Override
-    public ResponseEntity<Optional<NotificationsEntity>> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        notificationsRepo.delete(notification);
+        return ResponseEntity.noContent().build();
     }
-   
 }
