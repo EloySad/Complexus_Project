@@ -1,7 +1,6 @@
 package com.riwi.complexus.infrastructure.services;
 
 import com.riwi.complexus.domain.entities.RolsEntity;
-import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.repositories.interfaces.RolRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IRolService;
 import org.springframework.beans.factory.annotation.Autowired;

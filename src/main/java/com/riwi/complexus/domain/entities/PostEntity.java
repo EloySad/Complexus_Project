@@ -39,7 +39,7 @@ public class PostEntity {
 
         @ManyToOne
         @JoinColumn(name = "user_id", nullable = false)
-        private Long user;
+        private UserEntity user;
 
 }
 
