@@ -54,19 +54,19 @@ public class ResidentService implements IResidentService {
     @Override
     public ResponseEntity<ResidentDto> create(@Valid ResidentDto entity) {
         // 1. Check if residential unit exists
-        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId().getId())
+        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId())
                 .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
-
-        RolsEntity rol = rolService.readById(entity.getRoleId());
+        // 2. Create user
+        RolsEntity rol = rolService.readById(entity.getRole());
         if (rol == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        // 2. Create user
+        }
 
         UserEntity newUser = UserEntity.builder()
                 .name(entity.getName())
-                .lastname(entity.getLastname)
+                .lastname(entity.getLastname())
                 .email(entity.getEmail())
-                .password(passwordEncoder.encode(entity.getPassword()))
+                .password(entity.getPassword())
                 .phone(entity.getPhone())
                 .role(rol)
                 .build();
@@ -76,20 +76,15 @@ public class ResidentService implements IResidentService {
         // 3. Create resident with the created user
         // clue:createdResident.setUser(createdUser)
 
+        ResidentEntity newResident = ResidentEntity.builder()
+                .tower(entity.getTower())
+                .residentialNumber(entity.getResidentialNumber())
+                .allowedNotification(true)
+                .userId(createNewUser)
+                .residentialUnitId(residentialUnit)
+                .build();
 
-
-
-
-//        ResidentEntity resident = ResidentEntity.builder()
-//                .tower(entity.getTower())
-//                .residentialNumber(entity.getResidentialNumber())
-//                .allowedNotification(entity.getAllowedNotification())
-//                .userId(user)
-//                .residentialUnitId(residentialUnit)
-//                .build();
-//
-//        ResidentDto createdResident = residentRepo.save(resident);
-//        return ResponseEntity.status(HttpStatus.OK).body(saveResident);
+        ResidentEntity createdResident = residentRepo.save(newResident);
     }
 
     @Override

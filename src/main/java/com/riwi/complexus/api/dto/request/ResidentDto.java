@@ -30,6 +30,9 @@ public class ResidentDto {
     @Max(40)
     private String phone;
 
+    @NotBlank
+    private Long role;
+
     @Max(100)
     private String tower;
 
@@ -37,7 +40,7 @@ public class ResidentDto {
     @Max(100)
     private String residentialNumber;
 
-
     @NotBlank
     private Long residentialUnitId;
+
 }
