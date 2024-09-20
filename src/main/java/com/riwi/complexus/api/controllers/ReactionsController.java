@@ -2,6 +2,10 @@ package com.riwi.complexus.api.controllers;
 
 import java.util.List;
 
+import com.riwi.complexus.domain.entities.PostEntity;
+import com.riwi.complexus.domain.entities.UserEntity;
+import com.riwi.complexus.infrastructure.services.PostService;
+import com.riwi.complexus.infrastructure.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +25,15 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @RequestMapping("/api/reactions")
 public class ReactionsController {
-    
+
     @Autowired
     private ReactionsService reactionsService;
+
+    @Autowired
+    private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public List<ReactionsEntity> getAllReactions() {
@@ -33,24 +43,47 @@ public class ReactionsController {
     @GetMapping("/{id}")
     public ResponseEntity<ReactionsEntity> getReactionById(@PathVariable Long id) {
         ReactionsEntity reaction = reactionsService.readById(id);
+        if (reaction == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(reaction);
     }
 
     @PostMapping
     public ResponseEntity<ReactionsEntity> createReaction(@RequestBody ReactionsRequest request) {
+        PostEntity post = postService.readById(request.getPostId());
+        UserEntity user = userService.readById(request.getUserId());
+
+        if (post == null || user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         ReactionsEntity reaction = ReactionsEntity.builder()
                 .liked(request.getLiked())
-                .createdAt(request.getCreatedAt()) 
+                .createdAt(request.getCreatedAt())
+                .post(post)
+                .user(user)
                 .build();
+
         return reactionsService.create(reaction);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ReactionsEntity> updateReaction(@PathVariable Long id, @RequestBody ReactionsRequest request) {
+        PostEntity post = postService.readById(request.getPostId());
+        UserEntity user = userService.readById(request.getUserId());
+
+        if (post == null || user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         ReactionsEntity reaction = ReactionsEntity.builder()
                 .liked(request.getLiked())
-                .createdAt(request.getCreatedAt()) 
+                .createdAt(request.getCreatedAt())
+                .post(post)
+                .user(user)
                 .build();
+
         return reactionsService.update(id, reaction);
     }
 

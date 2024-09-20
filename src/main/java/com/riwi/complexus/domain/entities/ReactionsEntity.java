@@ -30,7 +30,7 @@ public class ReactionsEntity {
     @Column(nullable = false)
     private Boolean liked; 
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne
