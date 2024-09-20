@@ -21,35 +21,12 @@ public class UserService implements IUserService {
     @Autowired
     RolService rolService;
 
-    @Override
-    public ResponseEntity<UserEntity> createDTO(UserRequest entity) {
-        RolsEntity rol = rolService.readById(entity.getRoleId());
-        if (rol == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-
-        UserEntity user = UserEntity.builder()
-                .name(entity.getName())
-                .lastname(entity.getLastname())
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .phone(entity.getPhone())
-                .role(rol)
-                .build();
-
-        UserEntity savedUser = userRepo.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
-    }
 
     @Override
     public void delete(Long id) {
         userRepo.deleteById(id);
     }
 
-    @Override
-    public List<UserEntity> readAll() {
-        return userRepo.findAll();
-    }
 
     @Override
     public UserEntity readById(Long id) {

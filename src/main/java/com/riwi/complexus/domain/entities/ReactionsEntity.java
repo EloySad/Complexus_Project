@@ -15,29 +15,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "notifications")
+@Entity(name = "reactions")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NotificationsEntity {
+public class ReactionsEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(nullable = false, length = 255)
-    private String message;
-    
-    @Column(name = "created_at", nullable = false)
+
+    @Column(nullable = false)
+    private Boolean liked; 
+
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id")
     private PostEntity post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id") 
-    private UserEntity user;
+    @JoinColumn(name = "user_id")
+    private UserEntity user; 
 }

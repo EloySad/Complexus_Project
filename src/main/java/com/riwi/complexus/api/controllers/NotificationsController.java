@@ -41,7 +41,7 @@ public class NotificationsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<NotificationsEntity>> findById(@PathVariable Long id) {
-        return notificationsService.findById(id); // Asegúrate de devolver el tipo correcto
+        return notificationsService.findById(id); 
     }
 
     @GetMapping

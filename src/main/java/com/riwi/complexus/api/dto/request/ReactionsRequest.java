@@ -2,6 +2,7 @@ package com.riwi.complexus.api.dto.request;
 
 import java.time.LocalDateTime;
 
+import com.riwi.complexus.domain.entities.PostEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NotificationsRequest {
+public class ReactionsRequest {
     
-    private String message; 
+    private Boolean liked; 
     private LocalDateTime createdAt;
     private Long postId;
-    private Long userId;
+    private Long UserId;
 }

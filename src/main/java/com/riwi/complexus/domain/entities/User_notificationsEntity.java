@@ -29,10 +29,10 @@ public class User_notificationsEntity {
     private Boolean seen;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private Long userId;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "notification_id", nullable = false)
-    private Long notificationId; 
+    @JoinColumn(name = "notification_id")
+    private NotificationsEntity notification; 
 }
