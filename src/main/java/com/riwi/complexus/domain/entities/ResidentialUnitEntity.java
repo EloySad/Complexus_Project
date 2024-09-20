@@ -29,17 +29,10 @@ public class ResidentialUnitEntity {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "has_tower")
-    private Boolean hasTower;
 
-    // Relación muchos a uno con Admin
-    @ManyToOne
-    @JoinColumn(name = "admin_id")
-    private AdminEntity admin;
-
-    // Relación uno a muchos con User
-    @OneToMany(mappedBy = "residentialUnit")
-    private List<ResidentEntity> users;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserEntity user;
 
 
 }

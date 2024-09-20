@@ -22,31 +22,31 @@ public class ResidentialUnitController implements IResidentialUnitService {
     UserService userService;
 
     @Override
-    @PostMapping("/create")
+    @PostMapping("/createUnit")
     public ResponseEntity<ResidentialUnitEntity> createDTO(@RequestBody ResidentialUnitRequest residentialUnitRequestDTO) {
         return residentialUnitService.createDTO(residentialUnitRequestDTO);
     }
 
     @Override
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteUnit/{id}")
     public void delete(@PathVariable Long id) {
         residentialUnitService.delete(id);
     }
 
     @Override
-    @GetMapping("/readAll")
+    @GetMapping("/readAllUnit")
     public List<ResidentialUnitEntity> readAll() {
         return residentialUnitService.readAll();
     }
 
     @Override
-    @GetMapping("/readById/{id}")
+    @GetMapping("/readByIdUnit/{id}")
     public ResidentialUnitEntity readById(@PathVariable Long id) {
         return residentialUnitService.readById(id);
     }
 
     @Override
-    @PutMapping("/update/{id}")
+    @PutMapping("/updateUnit/{id}")
     public ResponseEntity<ResidentialUnitEntity> update(@PathVariable Long id,@RequestBody ResidentialUnitRequest residentialUnitRequest) {
         return residentialUnitService.update(id, residentialUnitRequest);
     }
