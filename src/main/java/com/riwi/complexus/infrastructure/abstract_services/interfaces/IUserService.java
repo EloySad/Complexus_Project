@@ -10,3 +10,4 @@ public interface IUserService extends
         ReadById<UserEntity, Long>,
         UpdateDTO<UserEntity, Long,UserRequest> {
 }
+
