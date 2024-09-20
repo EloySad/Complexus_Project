@@ -8,9 +8,10 @@ import org.springframework.http.ResponseEntity;
 import com.riwi.complexus.domain.entities.User_notificationsEntity;
 
 public interface IUser_notificationsService {
+
     ResponseEntity<User_notificationsEntity> create(User_notificationsEntity userNotification);
     
-    ResponseEntity<Optional<User_notificationsEntity>> findById(Long id);
+    ResponseEntity<Optional<User_notificationsEntity>> findById(Long id); // Usa Optional si es necesario
     
     ResponseEntity<List<User_notificationsEntity>> findAll();
     

@@ -9,6 +9,6 @@ import com.riwi.complexus.domain.entities.ReactionsEntity;
 @Repository
 public interface ReactionsRepo extends JpaRepository<ReactionsEntity, Long>{
     
-    @Query("SELECT COUNT(r) FROM Reaction r WHERE r.post.id = :postId")
+    @Query("SELECT COUNT(r) FROM ReactionsEntity r WHERE r.post.id = :postId")
     int countReactionsByPostId(Long postId);
 }

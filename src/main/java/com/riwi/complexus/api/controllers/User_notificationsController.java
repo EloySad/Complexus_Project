@@ -19,7 +19,7 @@ import com.riwi.complexus.infrastructure.abstract_services.interfaces.IUser_noti
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api/user-notifications")
+@RequestMapping("/api/user_notifications")
 public class User_notificationsController {
     
     @Autowired
@@ -42,7 +42,7 @@ public class User_notificationsController {
 
     @PutMapping("/{id}")
     public ResponseEntity<User_notificationsEntity> update(@PathVariable Long id,
-                                                            @RequestBody User_notificationsEntity userNotification) {
+        @RequestBody User_notificationsEntity userNotification) {
         return userNotificationsService.update(id, userNotification);
     }
 

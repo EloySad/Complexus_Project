@@ -13,6 +13,7 @@ import com.riwi.complexus.utils.exceptions.ResourceNotFoundException;
 
 @Service
 public class ReactionsService implements IReactionsService{
+
     @Autowired
     private ReactionsRepo reactionRepository;
 
@@ -28,7 +29,9 @@ public class ReactionsService implements IReactionsService{
 
     @Override
     public void delete(Long id) {
-        reactionRepository.deleteById(id);
+        ReactionsEntity existingEntity = reactionRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Reacción no encontrada con id " + id));
+        reactionRepository.delete(existingEntity);
     }
 
     @Override
@@ -47,7 +50,6 @@ public class ReactionsService implements IReactionsService{
         ReactionsEntity existingEntity = reactionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reacción no encontrada con id " + id));
         
-        // Actualiza los campos necesarios
         existingEntity.setLiked(entity.getLiked());
         existingEntity.setCreatedAt(entity.getCreatedAt());
         existingEntity.setPost(entity.getPost());
