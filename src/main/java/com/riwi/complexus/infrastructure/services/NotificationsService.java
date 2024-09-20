@@ -45,10 +45,9 @@ public class NotificationsService implements INotificationsService{
 
         NotificationsEntity notification = NotificationsEntity.builder()
                 .message(message)
-                .createAt(LocalDateTime.now())
+                .createdAt(LocalDateTime.now())
                 .post(post)
-                .admin(admin)
-                .build();
+                  .build();
 
         NotificationsEntity savedNotification = notificationsRepo.save(notification);
 
@@ -56,9 +55,8 @@ public class NotificationsService implements INotificationsService{
         for (UserEntity user : users) {
             NotificationsEntity userNotification = NotificationsEntity.builder()
                     .message(message)
-                    .createAt(LocalDateTime.now())
+                    .createdAt(LocalDateTime.now())
                     .post(post)
-                    .admin(admin)
                     .user(user)
                     .build();
 
@@ -93,9 +91,9 @@ public class NotificationsService implements INotificationsService{
                 .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id " + id));
 
         existingNotification.setMessage(notification.getMessage());
-        existingNotification.setCreateAt(notification.getCreateAt());
+        existingNotification.setCreatedAt(notification.getCreatedAt());
         existingNotification.setPost(notification.getPost());
-        existingNotification.setAdmin(notification.getAdmin());
+
 
         NotificationsEntity updatedNotification = notificationsRepo.save(existingNotification);
         return ResponseEntity.ok(updatedNotification);

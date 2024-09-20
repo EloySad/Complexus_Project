@@ -31,17 +31,13 @@ public class NotificationsEntity {
     private String message;
     
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private UserEntity admin;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true) 
+    @JoinColumn(name = "user_id") 
     private UserEntity user;
 }

@@ -1,7 +1,6 @@
 package com.riwi.complexus.api.dto.request;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +15,6 @@ public class NotificationsRequest {
     
     private String message; 
     private LocalDateTime createdAt;
-    private Long adminId;
-    private List<Long> residentId;
+    private Long postId;
+    private Long userId;
 }
