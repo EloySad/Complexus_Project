@@ -22,26 +22,26 @@ public class MediaController {
         this.mediaService = mediaService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<MediaResponse> createMedia(@RequestBody MediaRequest mediaRequest) {
         MediaEntity createdMedia = mediaService.createDTO(mediaRequest);
         MediaResponse response = mediaService.readById(createdMedia.getId());
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getById/{id}")
     public ResponseEntity<MediaResponse> getMediaById(@PathVariable Long id) {
         MediaResponse response = mediaService.readById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("readAll")
     public ResponseEntity<List<MediaResponse>> getAllMedia() {
         List<MediaResponse> responseList = mediaService.readAll();
         return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<MediaResponse> updateMedia(@PathVariable Long id, @RequestBody MediaRequest mediaRequest) {
         MediaEntity media = new MediaEntity();
         media.setId(id);
@@ -50,7 +50,7 @@ public class MediaController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delet/{id}")
     public ResponseEntity<Void> deleteMedia(@PathVariable Long id) {
         mediaService.delete(id);
         return ResponseEntity.noContent().build();
