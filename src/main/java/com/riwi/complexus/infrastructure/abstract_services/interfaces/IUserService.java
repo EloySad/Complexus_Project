@@ -6,9 +6,8 @@ import com.riwi.complexus.infrastructure.abstract_services.CRUD.*;
 import org.springframework.http.ResponseEntity;
 
 public interface IUserService extends
-        CreateDTO<UserEntity, UserRequest>,
+
         Delete<Long>,
-        ReadAll<UserEntity>,
         ReadById<UserEntity, Long>,
         UpdateDTO<UserEntity, Long,UserRequest> {
 }

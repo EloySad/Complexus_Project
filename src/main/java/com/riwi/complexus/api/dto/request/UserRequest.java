@@ -1,5 +1,6 @@
 package com.riwi.complexus.api.dto.request;
 
+import com.riwi.complexus.domain.entities.RolsEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
