@@ -3,6 +3,8 @@ package com.riwi.complexus.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity(name = "roles")
 @Data
 @NoArgsConstructor
@@ -15,4 +17,7 @@ public class RolsEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "role")
+    private Set<UserEntity> users;
 }

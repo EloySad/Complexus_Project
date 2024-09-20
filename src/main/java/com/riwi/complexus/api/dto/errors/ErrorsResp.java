@@ -2,19 +2,42 @@ package com.riwi.complexus.api.dto.errors;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
-
-@EqualsAndHashCode(callSuper=true)
-@Getter
-@Setter
-@SuperBuilder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ErrorsResp extends BaseErrorResponse{
-    private List<String> errors;
+    
+    public ErrorsResp() {
+        super();
+    }
+
+    public ErrorsResp(int code, String status, List<String> errors) {
+        super(code, status, errors);
+    }
+
+    public static ErrorsRespBuilder builder() {
+        return new ErrorsRespBuilder();
+    }
+
+    public static class ErrorsRespBuilder {
+        private int code;
+        private String status;
+        private List<String> errors;
+
+        public ErrorsRespBuilder code(int code) {
+            this.code = code;
+            return this;
+        }
+
+        public ErrorsRespBuilder status(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public ErrorsRespBuilder errors(List<String> errors) {
+            this.errors = errors;
+            return this;
+        }
+
+        public ErrorsResp build() {
+            return new ErrorsResp(code, status, errors);
+        }
+    }
 }
