@@ -21,27 +21,27 @@ public class PostController {
         this.postService = postService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity<PostEntity> createPost(@RequestBody PostRequest postRequest) {
         return postService.createDTO(postRequest);
     }
 
-    @GetMapping
+    @GetMapping("readAll")
     public ResponseEntity<List<PostEntity>> getAllPosts() {
         return new ResponseEntity<>(postService.readAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/readById/{id}")
     public ResponseEntity<PostEntity> getPostById(@PathVariable Long id) {
         return ResponseEntity.ok(postService.readById(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<PostEntity> updatePost(@PathVariable Long id, @RequestBody PostEntity post) {
         return postService.update(id, post);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         postService.delete(id);
         return ResponseEntity.noContent().build();
