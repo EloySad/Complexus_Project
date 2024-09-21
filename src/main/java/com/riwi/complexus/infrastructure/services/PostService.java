@@ -4,7 +4,6 @@ import com.riwi.complexus.api.dto.request.PostRequest;
 import com.riwi.complexus.domain.entities.PostEntity;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.repositories.interfaces.PostRepo;
-import com.riwi.complexus.domain.repositories.interfaces.UserRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
