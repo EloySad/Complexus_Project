@@ -53,11 +53,11 @@ public class ResidentService implements IResidentService {
 
     public ResidentDto create(@Valid ResidentDto entity) {
         // 1. Check if residential unit exists
-        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId().getId())
+        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId())
                 .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
         // 2. Create user
 
-        RolsEntity rol = rolService.readById(entity.getRole().getId());
+        RolsEntity rol = rolService.readById(entity.getRoleId());
 
         UserEntity newUser = UserEntity.builder()
                 .name(entity.getName())
@@ -82,19 +82,9 @@ public class ResidentService implements IResidentService {
 
         ResidentEntity createdResident = residentRepo.save(newResident);
 
-        ResidentDto residentDto = ResidentDto.builder()
-                .name(newUser.getName())
-                .lastname(newUser.getLastname())
-                .email(newUser.getEmail())
-                .password(newUser.getPassword())
-                .phone(newUser.getPhone())
-                .role(newUser.getRole())
-                .tower(newResident.getTower())
-                .residentialNumber(newResident.getResidentialNumber())
-                .residentialUnitId(newResident.getResidentialUnitId())
-                .build();
 
-        return residentDto;
+        ResidentDto response = new ResidentDto();
+        return ResponseEntity.ok(response).getBody();
     }
 
     @Override
