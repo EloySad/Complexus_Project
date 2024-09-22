@@ -16,6 +16,10 @@ public class ResidentDto {
 
     @NotBlank
     @Max(100)
+    private  String username;
+
+    @NotBlank
+    @Max(100)
     private String lastname;
 
     @NotBlank

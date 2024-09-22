@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class ResidentService implements IResidentService {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     ResidentialUnitRepo residentialUnitRepo ;
@@ -61,9 +65,10 @@ public class ResidentService implements IResidentService {
 
         UserEntity newUser = UserEntity.builder()
                 .name(entity.getName())
+                .username(entity.getUsername())
                 .lastname(entity.getLastname())
                 .email(entity.getEmail())
-                .password(entity.getPassword())
+                .password(passwordEncoder.encode(entity.getPassword()))
                 .phone(entity.getPhone())
                 .role(rol)
                 .build();

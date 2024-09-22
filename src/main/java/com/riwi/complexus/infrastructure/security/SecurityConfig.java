@@ -35,7 +35,7 @@ public class SecurityConfig {
             ,"/user/readById/{}","/user/update/{}", "/auth/login" ,"/user/register","/residentialUnit/createUnit", "/residentialUnit/deleteUnit/{}",
             "/residentialUnit/readAllUnit","/residentialUnit/readByIdUnit/{}","/residentialUnit/updateUnit/{}","/swagger-ui/**", "/v3/api-docs/**" };
 
-    private final String[] ADMIN_ENDPOINTS = {"/user"};
+    private final String[] ADMIN_ENDPOINTS = {"/user","/resident/create"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         request -> request
-                                .requestMatchers(ADMIN_ENDPOINTS).hasAuthority("Admin")
+                                .requestMatchers(ADMIN_ENDPOINTS).hasAnyAuthority("admin","superadmin")
                                 .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                                 .anyRequest().authenticated()
                 )
