@@ -42,6 +42,8 @@ public class AuthServiceImpl implements IAuthService {
         authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(request.getIdentifier(), request.getPassword()));
 
         return AuthResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
                 .message(user.getRole() + " successfully authenticated")
                 .token(this.jwtUtil.generateToken(user))
                 .build();
