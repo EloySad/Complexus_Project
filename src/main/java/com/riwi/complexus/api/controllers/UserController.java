@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name = "User", description = "Manages user-related requests.")
+@Tag(name = "User", description = "Manages user requests.")
 public class UserController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private IUserService userServices;
 
-    @SecurityRequirement(name = "bearerAuth")
+    @SecurityRequirement(name = "")
     @PostMapping("admin/register")
     @Operation(
             summary = "Create an admin.",
@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/register")
     @Operation(
-            summary = "Create a customer.",
+            summary = "Create a Resident.",
             description = "Provides the user's data to create the client.")
     public ResponseEntity<AuthResponse> registerCustomer(
             @Validated @RequestBody UserRequest request) {
@@ -48,7 +48,7 @@ public class UserController {
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/readAllUsers")
     @Operation(
-            summary = "List all users.",
+            summary = "List all users",
             description = "Provide the token to validate the permissions and obtain the list of users.")
     public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(this.userServices.getAllUsers());
@@ -57,17 +57,26 @@ public class UserController {
 
 
     @DeleteMapping("/delete/{id}")
+    @Operation(
+            summary = "Delete users ",
+            description = "Permanently delete a user by user id.")
     public void delete(@PathVariable Long id) {
         userService.delete(id);
     }
 
 
     @GetMapping("/readById/{id}")
+    @Operation(
+            summary = "Read users by id",
+            description = "View the information of registered users according to their ids.")
     public UserEntity readById(@PathVariable Long id) {
         return userService.readById(id);
     }
 
     @PutMapping("/update/{id}")
+    @Operation(
+            summary = "Update users",
+            description = "Editing of users, in this endpoint you can modify user data.")
     public ResponseEntity<UserEntity> update(@PathVariable Long id, @RequestBody UserRequest userRequest) {
         return userService.update(id, userRequest);
     }
