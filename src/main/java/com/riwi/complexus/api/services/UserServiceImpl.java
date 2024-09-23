@@ -37,7 +37,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public AuthResponse register(UserRequest request, Long roleId) {
-        UserEntity userDB = userRepository.findByNameOrEmail(request.getName(),request.getEmail());
+        UserEntity userDB = userRepository.findByUsernameOrEmail(request.getName(),request.getEmail());
         RolsEntity role = rolRepo.findById(roleId).orElseThrow();
         if (userDB != null){
             throw new InvalidCredentialsException("Username register");
@@ -45,12 +45,12 @@ public class UserServiceImpl implements IUserService {
 
         UserEntity user = UserEntity.builder()
                 .name(request.getName())
+                .username(request.getUsername())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
                 .role(role)
-                .enabled(true)
                 .build();
 
         user = this.userRepository.save(user);

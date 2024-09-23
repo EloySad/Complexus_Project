@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Entity(name = "users")
 @Data
@@ -24,6 +23,9 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @Column(nullable = false, length = 100)
+    private  String username;
 
     @Column(nullable = false, length = 100)
     private String lastname;
@@ -42,8 +44,6 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "roles_id", nullable = false)
     private RolsEntity role;
 
-    @Column(nullable = false)
-    private Boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,8 +70,5 @@ public class UserEntity implements UserDetails {
         return UserDetails.super.isCredentialsNonExpired();
     }
 
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
+
 }

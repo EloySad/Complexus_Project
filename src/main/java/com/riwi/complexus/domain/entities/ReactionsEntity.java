@@ -33,10 +33,14 @@ public class ReactionsEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    // Relación Many-to-One con la entidad PostEntity. Una reacción puede estar asociada opcionalmente a un post.
+    // Se especifica el nombre de la columna de la clave foránea como "post_id".
     @ManyToOne
     @JoinColumn(name = "post_id")
     private PostEntity post;
 
+    // Relación Many-to-One con la entidad UserEntity. Una reación puede estar asociada opcionalmente a un usuario.
+    // Se especifica el nombre de la columna de la clave foránea como "user_id".
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user; 

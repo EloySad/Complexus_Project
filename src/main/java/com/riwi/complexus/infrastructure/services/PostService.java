@@ -2,6 +2,7 @@ package com.riwi.complexus.infrastructure.services;
 
 import com.riwi.complexus.api.dto.request.PostRequest;
 import com.riwi.complexus.domain.entities.PostEntity;
+import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.repositories.interfaces.PostRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,16 @@ public class PostService implements IPostService {
     @Autowired
     private PostRepo postRepo;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public ResponseEntity<PostEntity> createDTO(PostRequest postRequest) {
+        UserEntity user = userService.readById(postRequest.getUserId());
+
         PostEntity postEntity = PostEntity.builder()
                 .title(postRequest.getTitle())
+                .user(user)
                 .description(postRequest.getDescription())
                 .createdAt(LocalDateTime.now())
                 .pinned(postRequest.isPinned())

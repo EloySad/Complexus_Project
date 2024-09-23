@@ -2,7 +2,6 @@ package com.riwi.complexus.api.dto.request;
 
 import java.time.LocalDateTime;
 
-import com.riwi.complexus.domain.entities.PostEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserService implements IUserService {
@@ -47,8 +46,9 @@ public class UserService implements IUserService {
 
         userExisting.setName(userRequest.getName());
         userExisting.setLastname(userRequest.getLastname());
+        userExisting.setUsername(userRequest.getUsername());
         userExisting.setEmail(userRequest.getEmail());
-        userExisting.setPassword(userRequest.getPassword());
+        userExisting.setPassword(userRequest.getPassword()); // encryptarlo
         userExisting.setPhone(userRequest.getPhone());
         userExisting.setRole(rol);
 

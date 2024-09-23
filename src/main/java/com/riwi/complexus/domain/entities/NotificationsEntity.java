@@ -33,10 +33,14 @@ public class NotificationsEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    // Relación Many-to-One con la entidad PostEntity. Una notificación está asociada a un post.
+    // Se especifica el nombre de la columna de la clave foránea como "post_id".
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private PostEntity post;
 
+    // Relación Many-to-One con la entidad UserEntity. Una notificación puede estar asociada opcionalmente a un usuario.
+    // Se especifica el nombre de la columna de la clave foránea como "user_id".
     @ManyToOne
     @JoinColumn(name = "user_id") 
     private UserEntity user;
