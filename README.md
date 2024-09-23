@@ -18,9 +18,9 @@ ________________________________________________________________________________
 ______________________________________________________________________________________________________________________________________________________________________________________________
 
  ## Tecnologías
- <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*2XrX0fP0htyTCah7AglTig.jpeg" style="width:100%">
+ <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*2XrX0fP0htyTCah7AglTig.jpeg" style="width:33%">
  
-  <img src="https://miro.medium.com/v2/resize:fit:750/format:webp/1*_ovMcBbTlga_Yw_CJOTsJg.png" style="width:100%">
+  <img src="https://miro.medium.com/v2/resize:fit:750/format:webp/1*_ovMcBbTlga_Yw_CJOTsJg.png" style="width:33%">
   
-  <img src="https://www.svgrepo.com/show/303251/mysql-logo.svg" style="width:100%">
+  <img src="https://www.svgrepo.com/show/303251/mysql-logo.svg" style="width:33%">
  
