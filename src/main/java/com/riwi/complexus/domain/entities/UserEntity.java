@@ -26,6 +26,9 @@ public class UserEntity implements UserDetails {
     private String name;
 
     @Column(nullable = false, length = 100)
+    private  String username;
+
+    @Column(nullable = false, length = 100)
     private String lastname;
 
     @Column(nullable = false, length = 200)
@@ -42,8 +45,6 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "roles_id", nullable = false)
     private RolsEntity role;
 
-    @Column(nullable = false)
-    private Boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,8 +71,5 @@ public class UserEntity implements UserDetails {
         return UserDetails.super.isCredentialsNonExpired();
     }
 
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
+
 }
