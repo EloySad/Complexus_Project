@@ -33,9 +33,10 @@ public class SecurityConfig {
 
     private final String[] PUBLIC_ENDPOINTS = {
             "/user/admin/register","/user/delete/{}" ,"/user/readById/{}","/user/update/{}", "/auth/login" ,"/user/register",
-            "/swagger-ui/**", "/v3/api-docs/**", "api/posts/**" };
+            "/residentialUnit/createUnit", "/residentialUnit/deleteUnit/{}",
+            "/residentialUnit/readAllUnit","/residentialUnit/readByIdUnit/{}","/residentialUnit/updateUnit/{}","/swagger-ui/**", "/v3/api-docs/**" };
 
-    private final String[] ADMIN_ENDPOINTS = { "/resident/**", "/residentialUnit/**" };
+    private final String[] ADMIN_ENDPOINTS = { "/resident/**" };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
