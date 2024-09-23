@@ -5,6 +5,7 @@ import com.riwi.complexus.domain.entities.ResidentEntity;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentService;
 import com.riwi.complexus.infrastructure.services.ResidentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ public class ResidentController{
         return residentService.readById(id);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/create")
     public ResponseEntity<ResidentDto> create(@Valid @RequestBody ResidentDto user) {
 

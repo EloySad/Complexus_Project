@@ -49,7 +49,7 @@ public class UserService implements IUserService {
         userExisting.setLastname(userRequest.getLastname());
         userExisting.setUsername(userRequest.getUsername());
         userExisting.setEmail(userRequest.getEmail());
-        userExisting.setPassword(userRequest.getPassword());
+        userExisting.setPassword(userRequest.getPassword()); // encryptarlo
         userExisting.setPhone(userRequest.getPhone());
         userExisting.setRole(rol);
 

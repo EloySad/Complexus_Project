@@ -51,7 +51,6 @@ public class UserServiceImpl implements IUserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .phone(request.getPhone())
                 .role(role)
-                .enabled(true)
                 .build();
 
         user = this.userRepository.save(user);
