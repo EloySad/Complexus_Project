@@ -31,8 +31,8 @@ public class SecurityConfig {
 //    @Autowired
 //    RolsEntity roleResident;
 
-    private final String[] PUBLIC_ENDPOINTS = {"auth/login",
-            "resident/readById/{}","/user/admin/register","/user/delete/{}" ,"/user/readById/{}","/user/update/{}", "/auth/login" ,"/user/register",
+    private final String[] PUBLIC_ENDPOINTS = {"/auth/login",
+            "resident/readById/{}","/user/admin/register","/user/delete/{}" ,"/user/readById/{}","/user/update/{}","/user/register",
             "/residentialUnit/createUnit", "/residentialUnit/deleteUnit/{}",
             "/residentialUnit/readAllUnit","/residentialUnit/readByIdUnit/{}","/residentialUnit/updateUnit/{}","/swagger-ui/**", "/v3/api-docs/**" };
 
