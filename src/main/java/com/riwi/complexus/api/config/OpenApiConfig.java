@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
         version = "1.0",
         description = "This is the api of Complexus"),
         servers = {
-                @Server(url = "https://complexusproject-production-e80b.up.railway.app/swagger-ui/index.html", description = "Railway COMPLEXUS Server"),
+                @Server(url = "https://complexusproject-production-e80b.up.railway.app", description = "Railway COMPLEXUS Server"),
                 @Server(url = "http://localhost:8080/swagger-ui/index.html", description = "Local COMPLEXUS Server")
         }
 )
