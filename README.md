@@ -14,13 +14,13 @@ ________________________________________________________________________________
 
 
 ## Obtaining requirements
- <a href="[https://docs.google.com/document/d/1j1YIKSyTsicmNvsFIHYr5D-do8pb_F9wLs7YxfhJBfE/edit?usp=sharing](https://docs.google.com/document/d/1PYJSq65gLmAED-FeUPmWEIK_hYmlRZaDlMunQ5DGI2M/edit?usp=sharing)](https://docs.google.com/document/d/1PYJSq65gLmAED-FeUPmWEIK_hYmlRZaDlMunQ5DGI2M/edit?usp=sharing)">Requerimientos</a>
+ <a href="https://docs.google.com/document/d/1PYJSq65gLmAED-FeUPmWEIK_hYmlRZaDlMunQ5DGI2M/edit">Requerimientos</a>
 ______________________________________________________________________________________________________________________________________________________________________________________________
 
  ## Tecnologías
- <img src="[https://i.postimg.cc/prh59F0C/diagrama-BD.png](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*2XrX0fP0htyTCah7AglTig.jpeg)" style="width:100%">
+ <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*2XrX0fP0htyTCah7AglTig.jpeg" style="width:100%">
  
-  <img src="[https://i.postimg.cc/prh59F0C/diagrama-BD.png](https://miro.medium.com/v2/resize:fit:750/format:webp/1*_ovMcBbTlga_Yw_CJOTsJg.png)" style="width:100%">
+  <img src="https://miro.medium.com/v2/resize:fit:750/format:webp/1*_ovMcBbTlga_Yw_CJOTsJg.png" style="width:100%">
   
-  <img src="[[https://i.postimg.cc/prh59F0C/diagrama-BD.png](https://miro.medium.com/v2/resize:fit:750/format:webp/1*_ovMcBbTlga_Yw_CJOTsJg.png)](https://www.svgrepo.com/show/303251/mysql-logo.svg)" style="width:100%">
+  <img src="https://www.svgrepo.com/show/303251/mysql-logo.svg" style="width:100%">
  
