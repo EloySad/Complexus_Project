@@ -5,6 +5,7 @@ import com.riwi.complexus.api.dto.response.AuthResponse;
 import com.riwi.complexus.domain.entities.UserEntity;
 import com.riwi.complexus.domain.exceptions.InvalidCredentialsException;
 import com.riwi.complexus.domain.ports.service.IAuthService;
+import com.riwi.complexus.domain.repositories.interfaces.UserRepo;
 import com.riwi.complexus.infrastructure.helpers.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class AuthServiceImpl implements IAuthService {
     @Autowired
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserRepo userRepo;
+
     @Override
     public AuthResponse login(AuthRequest request) {
 
@@ -42,6 +46,8 @@ public class AuthServiceImpl implements IAuthService {
         authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(request.getIdentifier(), request.getPassword()));
 
         return AuthResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
                 .message(user.getRole() + " successfully authenticated")
                 .token(this.jwtUtil.generateToken(user))
                 .build();
