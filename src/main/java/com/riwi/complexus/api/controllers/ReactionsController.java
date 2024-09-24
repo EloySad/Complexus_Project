@@ -42,8 +42,9 @@ public class ReactionsController {
     @Operation(
             summary = "Retrieves all reactions.",
             description = "Retrieves a list of all reactions in the system.")
-    public List<ReactionsEntity> getAllReactions() {
-        return reactionsService.readAll();
+    public ResponseEntity<List<ReactionsEntity>> getAllReactions() {
+        List<ReactionsEntity> reactions = reactionsService.readAll();
+        return ResponseEntity.ok(reactions); // Envuelve la lista en ResponseEntity
     }
 
     @GetMapping("/{id}")
@@ -52,10 +53,7 @@ public class ReactionsController {
         description = "Retrieves the details of a specific reaction using its ID.")
     public ResponseEntity<ReactionsEntity> getReactionById(@PathVariable Long id) {
         ReactionsEntity reaction = reactionsService.readById(id);
-        if (reaction == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(reaction);
+        return ResponseEntity.ok(reaction); // Devuelve la reacción envuelta en ResponseEntity
     }
 
     @PostMapping
@@ -63,13 +61,15 @@ public class ReactionsController {
             summary = "Create a reaction.",
             description = "Create a new reaction to a post in the system.")
     public ResponseEntity<ReactionsEntity> createReaction(@RequestBody ReactionsRequest request) {
+        // Verifica la existencia del post y del usuario
         PostEntity post = postService.readById(request.getPostId());
         UserEntity user = userService.readById(request.getUserId());
 
         if (post == null || user == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().build(); // Maneja errores con bad request
         }
 
+        // Crea la nueva reacción
         ReactionsEntity reaction = ReactionsEntity.builder()
                 .liked(request.getLiked())
                 .createdAt(request.getCreatedAt())
@@ -77,7 +77,7 @@ public class ReactionsController {
                 .user(user)
                 .build();
 
-        return reactionsService.create(reaction);
+        return reactionsService.create(reaction); // Devuelve la reacción creada
     }
 
     @PutMapping("/{id}")
@@ -85,6 +85,7 @@ public class ReactionsController {
         summary = "Update a reaction.",
         description = "Updates the details of an existing reaction.")
     public ResponseEntity<ReactionsEntity> updateReaction(@PathVariable Long id, @RequestBody ReactionsRequest request) {
+        // Verifica la existencia del post y del usuario
         PostEntity post = postService.readById(request.getPostId());
         UserEntity user = userService.readById(request.getUserId());
 
@@ -92,6 +93,7 @@ public class ReactionsController {
             return ResponseEntity.badRequest().build();
         }
 
+        // Crea la reacción con los nuevos valores
         ReactionsEntity reaction = ReactionsEntity.builder()
                 .liked(request.getLiked())
                 .createdAt(request.getCreatedAt())
@@ -99,7 +101,7 @@ public class ReactionsController {
                 .user(user)
                 .build();
 
-        return reactionsService.update(id, reaction);
+        return reactionsService.update(id, reaction); // Actualiza la reacción
     }
 
     @DeleteMapping("/{id}")
@@ -108,6 +110,6 @@ public class ReactionsController {
         description = "Removes a reaction from the system using its ID.")
     public ResponseEntity<Void> deleteReaction(@PathVariable Long id) {
         reactionsService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build(); // Devuelve una respuesta sin contenido
     }
 }
