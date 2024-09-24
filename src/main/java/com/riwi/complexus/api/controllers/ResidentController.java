@@ -2,6 +2,8 @@ package com.riwi.complexus.api.controllers;
 
 import com.riwi.complexus.api.dto.request.ResidentDto;
 import com.riwi.complexus.domain.entities.ResidentEntity;
+import com.riwi.complexus.domain.entities.UserEntity;
+import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentService;
 import com.riwi.complexus.infrastructure.services.ResidentService;
 
 import io.swagger.v3.oas.annotations.Operation;
