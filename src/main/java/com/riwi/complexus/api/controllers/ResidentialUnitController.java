@@ -5,6 +5,10 @@ import com.riwi.complexus.domain.entities.ResidentialUnitEntity;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentialUnitService;
 import com.riwi.complexus.infrastructure.services.ResidentialUnitService;
 import com.riwi.complexus.infrastructure.services.UserService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +30,9 @@ public class ResidentialUnitController implements IResidentialUnitService {
 
     @Override
     @PostMapping("/createUnit")
+    @Operation(
+            summary = "Create a residential unit.",
+            description = "Creates a new residential unit in the system.")
     public ResponseEntity<ResidentialUnitEntity> createDTO(@RequestBody ResidentialUnitRequest residentialUnitRequestDTO) {
         return residentialUnitService.createDTO(residentialUnitRequestDTO);
     }
@@ -53,6 +60,7 @@ public class ResidentialUnitController implements IResidentialUnitService {
     @Operation(
             summary = "Read Residential Unit by id",
             description = "View the information of registered residential unit according to their ids.")
+
     public ResidentialUnitEntity readById(@PathVariable Long id) {
         return residentialUnitService.readById(id);
     }
@@ -62,6 +70,7 @@ public class ResidentialUnitController implements IResidentialUnitService {
     @Operation(
             summary = "Update Residential Unit",
             description = "Editing of Residential unit, in this endpoint you can modify residential unit data.")
+
     public ResponseEntity<ResidentialUnitEntity> update(@PathVariable Long id,@RequestBody ResidentialUnitRequest residentialUnitRequest) {
         return residentialUnitService.update(id, residentialUnitRequest);
     }

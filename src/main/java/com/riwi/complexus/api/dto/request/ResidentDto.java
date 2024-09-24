@@ -1,8 +1,5 @@
 package com.riwi.complexus.api.dto.request;
 
-import com.riwi.complexus.domain.entities.ResidentialUnitEntity;
-import com.riwi.complexus.domain.entities.RolsEntity;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Data

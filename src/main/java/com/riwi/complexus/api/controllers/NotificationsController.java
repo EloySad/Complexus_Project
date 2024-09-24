@@ -17,16 +17,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.riwi.complexus.domain.entities.NotificationsEntity;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.INotificationsService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/notifications")
+@Tag(name = "Notifications", description = "Notification Manager.")
 public class NotificationsController {
     
     @Autowired
     private INotificationsService notificationsService;
 
     @PostMapping("/createPublicationWithNotification")
+    @Operation(
+            summary = "Create a publication whit a notification.",
+            description = "Create a notification of a post made by an Admin.")
     public ResponseEntity<NotificationsEntity> createPublicationWithNotification(
             @RequestParam Long adminId,
             @RequestParam Long postId,
@@ -35,21 +41,33 @@ public class NotificationsController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Create a notification.",
+            description = "Create a new notification in the system.")
     public ResponseEntity<NotificationsEntity> create(@RequestBody NotificationsEntity notification) {
         return notificationsService.create(notification);
     }
 
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Find a notification.",
+            description = "Find the details of a specific notification using its ID.")
     public ResponseEntity<Optional<NotificationsEntity>> findById(@PathVariable Long id) {
         return notificationsService.findById(id); 
     }
 
     @GetMapping
+    @Operation(
+            summary = "Find all notifications.",
+            description = "Find a list of all notifications in the system..")
     public ResponseEntity<List<NotificationsEntity>> findAll() {
         return notificationsService.findAll();
     }
 
     @PutMapping("/{id}")
+    @Operation(
+            summary = "Update a notification.",
+            description = "Updates the details of an existing notification.")
     public ResponseEntity<NotificationsEntity> update(
             @PathVariable Long id,
             @RequestBody NotificationsEntity notification) {
@@ -57,6 +75,9 @@ public class NotificationsController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Delete a notification.",
+            description = "Delete a system notification using its ID.")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         return notificationsService.deleteById(id);
     }

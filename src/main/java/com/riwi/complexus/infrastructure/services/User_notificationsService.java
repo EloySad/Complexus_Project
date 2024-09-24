@@ -15,7 +15,6 @@ public class User_notificationsService implements IUser_notificationsService{
     
     private final User_notificationsRepo userNotificationsRepo;
 
-    
     public User_notificationsService(User_notificationsRepo userNotificationsRepo) {
         this.userNotificationsRepo = userNotificationsRepo;
     }
@@ -25,10 +24,14 @@ public class User_notificationsService implements IUser_notificationsService{
         User_notificationsEntity savedUserNotification = userNotificationsRepo.save(userNotification);
         return ResponseEntity.ok(savedUserNotification);
     }
-    
+
     @Override
     public ResponseEntity<Optional<User_notificationsEntity>> findById(Long id) {
         Optional<User_notificationsEntity> notification = userNotificationsRepo.findById(id);
+        if (notification.isEmpty()) {
+            // Devuelve un mensaje detallado cuando la notificación no se encuentra
+            return ResponseEntity.status(404).body(Optional.empty());
+        }
         return ResponseEntity.ok(notification);
     }
 
@@ -40,8 +43,11 @@ public class User_notificationsService implements IUser_notificationsService{
 
     @Override
     public ResponseEntity<User_notificationsEntity> update(Long id, User_notificationsEntity userNotification) {
+        // Comprueba si la notificación existe
         if (!userNotificationsRepo.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            // Mensaje más específico cuando la notificación no se encuentra
+            return ResponseEntity.status(404)
+                    .body(null); 
         }
         userNotification.setId(id);
         User_notificationsEntity updatedUserNotification = userNotificationsRepo.save(userNotification);
@@ -50,10 +56,14 @@ public class User_notificationsService implements IUser_notificationsService{
 
     @Override
     public ResponseEntity<Void> deleteById(Long id) {
+        // Comprueba si la notificación existe
         if (!userNotificationsRepo.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            // Mensaje específico cuando la notificación no se encuentra
+            return ResponseEntity.status(404)
+                    .header("error-message", "Notificación no encontrada con id " + id)
+                    .build();
         }
         userNotificationsRepo.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build(); // Respuesta 204 sin contenido si la eliminación es exitosa
     }
 }

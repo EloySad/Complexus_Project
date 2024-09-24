@@ -1,7 +1,6 @@
 package com.riwi.complexus.api.dto.request;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
