@@ -31,12 +31,10 @@ public class SecurityConfig {
 //    @Autowired
 //    RolsEntity roleResident;
 
-    private final String[] PUBLIC_ENDPOINTS = {"/auth/login",
-            "resident/readById/{}","/user/admin/register","/user/delete/{}" ,"/user/readById/{}","/user/update/{}","/user/register",
-            "/residentialUnit/createUnit", "/residentialUnit/deleteUnit/{}",
-            "/residentialUnit/readAllUnit","/residentialUnit/readByIdUnit/{}","/residentialUnit/updateUnit/{}","/swagger-ui/**", "/v3/api-docs/**" };
+    private final String[] PUBLIC_ENDPOINTS = {"/auth/login","/user/admin/register","/swagger-ui/**", "/v3/api-docs/**", "/api/user_notifications/**", "/api/reactions/**", "/api/posts/**",
+                                              "/api/media/**", "/api/notifications/**"};
 
-    private final String[] ADMIN_ENDPOINTS = { "/resident/**" };
+    private final String[] ADMIN_ENDPOINTS = { "/resident/**","/user/delete/{}" ,"/user/readById/{}","/user/update/{}","/user/register", "/user/readAllUsers", "/residentialUnit/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
