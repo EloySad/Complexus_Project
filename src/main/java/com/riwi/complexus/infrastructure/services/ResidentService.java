@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ResidentService implements IResidentService {
+public class ResidentService {
 
     @Autowired
     ResidentRepo residentRepo;
@@ -39,17 +39,17 @@ public class ResidentService implements IResidentService {
     @Autowired
     ResidentialUnitRepo residentialUnitRepo ;
 
-    @Override
+
     public void delete(Long id) {
         residentRepo.deleteById(id);
     }
 
-    @Override
+
     public List<ResidentEntity> readAll() {
         return residentRepo.findAll();
     }
 
-    @Override
+
     public ResidentEntity readById(Long id) {
         return residentRepo.findById(id)
                 .orElseThrow(()-> new RuntimeException("Resident Not Found"));
@@ -147,5 +147,5 @@ public class ResidentService implements IResidentService {
 
         return response;
     }
-    }
 }
+
