@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ResidentService implements IResidentService {
+public class ResidentService {
 
     @Autowired
     ResidentRepo residentRepo;
@@ -39,27 +39,27 @@ public class ResidentService implements IResidentService {
     @Autowired
     ResidentialUnitRepo residentialUnitRepo ;
 
-    @Override
+
     public void delete(Long id) {
         residentRepo.deleteById(id);
     }
 
-    @Override
+
     public List<ResidentEntity> readAll() {
         return residentRepo.findAll();
     }
 
-    @Override
+
     public ResidentEntity readById(Long id) {
         return residentRepo.findById(id)
                 .orElseThrow(()-> new RuntimeException("Resident Not Found"));
     }
 
     public ResidentDto create(@Valid ResidentDto entity) {
-        // 1. Check if residential unit exists
+
         ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId())
                 .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
-        // 2. Create user
+
 
         RolsEntity rol = rolService.readById(entity.getRoleId());
 
@@ -75,7 +75,7 @@ public class ResidentService implements IResidentService {
 
         UserEntity createNewUser = userRepo.save(newUser);
 
-        // 3. Create resident with the created user
+
 
         ResidentEntity newResident = ResidentEntity.builder()
                 .tower(entity.getTower())
@@ -89,24 +89,63 @@ public class ResidentService implements IResidentService {
 
 
         ResidentDto response = new ResidentDto();
-        return ResponseEntity.ok(response).getBody();
+        response.setName(createdResident.getUserId().getName());
+        response.setUsername(createdResident.getUserId().getUsername());
+        response.setLastname(createdResident.getUserId().getLastname());
+        response.setEmail(createdResident.getUserId().getEmail());
+        response.setPhone(createdResident.getUserId().getPhone());
+        response.setTower(createdResident.getTower());
+        response.setResidentialNumber(createdResident.getResidentialNumber());
+        response.setResidentialUnitId(createdResident.getResidentialUnitId().getId());
+        response.setRoleId(createdResident.getUserId().getRole().getId());
+
+        return response;
     }
 
-    @Override
-    public ResponseEntity<ResidentEntity> update(Long id, ResidentEntity residentEntity) {
+    public ResidentDto update(Long id, @Valid ResidentDto entity) {
 
-        ResidentEntity residentExisting = residentRepo.findById(id).orElse(null);
-        if(residentExisting != null){
-            residentExisting.setTower(residentEntity.getTower());
-            residentExisting.setResidentialNumber(residentEntity.getResidentialNumber());
-            residentExisting.setAllowedNotification(residentEntity.getAllowedNotification());
-            residentExisting.setUserId(residentEntity.getUserId());
-            residentExisting.setResidentialUnitId(residentEntity.getResidentialUnitId());
+        ResidentEntity existingResident = residentRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Resident Not Found"));
 
-            ResidentEntity saveResident = residentRepo.save(residentExisting);
-            return ResponseEntity.ok(saveResident);
-        }else{
-            return ResponseEntity.notFound().build();
+
+        ResidentialUnitEntity residentialUnit = residentialUnitRepo.findById(entity.getResidentialUnitId())
+                .orElseThrow(() -> new RuntimeException("ResidentialUnitId Not Found"));
+
+
+        UserEntity existingUser = existingResident.getUserId();
+        existingUser.setName(entity.getName());
+        existingUser.setUsername(entity.getUsername());
+        existingUser.setLastname(entity.getLastname());
+        existingUser.setEmail(entity.getEmail());
+        existingUser.setPhone(entity.getPhone());
+
+
+        if (entity.getPassword() != null && !entity.getPassword().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(entity.getPassword()));
         }
+
+        userRepo.save(existingUser);
+
+
+        existingResident.setTower(entity.getTower());
+        existingResident.setResidentialNumber(entity.getResidentialNumber());
+        existingResident.setResidentialUnitId(residentialUnit);
+
+        ResidentEntity updatedResident = residentRepo.save(existingResident);
+
+
+        ResidentDto response = new ResidentDto();
+        response.setName(updatedResident.getUserId().getName());
+        response.setUsername(updatedResident.getUserId().getUsername());
+        response.setLastname(updatedResident.getUserId().getLastname());
+        response.setEmail(updatedResident.getUserId().getEmail());
+        response.setPhone(updatedResident.getUserId().getPhone());
+        response.setTower(updatedResident.getTower());
+        response.setResidentialNumber(updatedResident.getResidentialNumber());
+        response.setResidentialUnitId(updatedResident.getResidentialUnitId().getId());
+        response.setRoleId(updatedResident.getUserId().getRole().getId());
+
+        return response;
     }
 }
+
