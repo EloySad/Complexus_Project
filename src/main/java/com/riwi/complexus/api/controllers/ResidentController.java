@@ -2,8 +2,6 @@ package com.riwi.complexus.api.controllers;
 
 import com.riwi.complexus.api.dto.request.ResidentDto;
 import com.riwi.complexus.domain.entities.ResidentEntity;
-import com.riwi.complexus.domain.entities.UserEntity;
-import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentService;
 import com.riwi.complexus.infrastructure.services.ResidentService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -65,7 +63,7 @@ public class ResidentController{
     @Operation(
             summary = "Update a resident.",
             description = "Update the details of an existing resident.")
-    public ResponseEntity<ResidentEntity> update(@PathVariable Long id,@RequestBody ResidentEntity resident) {
+    public ResidentDto update(@PathVariable Long id, @RequestBody @Valid ResidentDto resident) {
         return residentService.update(id, resident);
     }
 }
