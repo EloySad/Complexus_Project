@@ -10,11 +10,8 @@ import com.riwi.complexus.domain.repositories.interfaces.ResidentialUnitRepo;
 import com.riwi.complexus.domain.repositories.interfaces.UserRepo;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.IResidentService;
 import jakarta.validation.Valid;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ResidentService {
+public class ResidentService implements IResidentService{
 
     @Autowired
     ResidentRepo residentRepo;
@@ -40,20 +37,22 @@ public class ResidentService {
     ResidentialUnitRepo residentialUnitRepo ;
 
 
+    @Override
     public void delete(Long id) {
         residentRepo.deleteById(id);
     }
 
-
+    @Override
     public List<ResidentEntity> readAll() {
         return residentRepo.findAll();
     }
 
-
+    @Override
     public ResidentEntity readById(Long id) {
         return residentRepo.findById(id)
                 .orElseThrow(()-> new RuntimeException("Resident Not Found"));
     }
+
 
     public ResidentDto create(@Valid ResidentDto entity) {
 
@@ -101,6 +100,7 @@ public class ResidentService {
 
         return response;
     }
+
 
     public ResidentDto update(Long id, @Valid ResidentDto entity) {
 
