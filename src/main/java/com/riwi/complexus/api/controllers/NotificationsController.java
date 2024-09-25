@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.riwi.complexus.api.dto.response.NotificationsResponse;
 import com.riwi.complexus.domain.entities.NotificationsEntity;
 import com.riwi.complexus.infrastructure.abstract_services.interfaces.INotificationsService;
 
@@ -31,15 +32,31 @@ public class NotificationsController {
 
     @PostMapping("/createPublicationWithNotification")
     @Operation(
-            summary = "Create a publication whit a notification.",
+            summary = "Create a publication with a notification.",
             description = "Create a notification of a post made by an Admin.")
-    public ResponseEntity<NotificationsEntity> createPublicationWithNotification(
-            @RequestParam Long adminId,
-            @RequestParam Long postId,
-            @RequestParam String message) {
-        return notificationsService.createPublicationWithNotification(adminId, postId, message);
-    }
-
+            public ResponseEntity<NotificationsResponse> createPublicationWithNotification(
+                @RequestParam Long adminId,
+                @RequestParam Long postId,
+                @RequestParam String message) {
+            
+            // Llamamos al servicio para crear la notificación
+            ResponseEntity<NotificationsEntity> responseEntity = notificationsService.createPublicationWithNotification(adminId, postId, message);
+            
+            NotificationsEntity notification = responseEntity.getBody();            
+            if (notification == null) {
+                return ResponseEntity.notFound().build(); 
+            }
+            
+            // Mapeamos la entidad al DTO de respuesta
+            NotificationsResponse response = NotificationsResponse.builder()
+                .message(notification.getMessage())
+                .createdAt(notification.getCreatedAt())
+                .postId(notification.getPost().getId())
+                .userId(notification.getUser() != null ? notification.getUser().getId() : null) // Usando getUser()
+                .build();
+            
+            return ResponseEntity.ok(response);
+        }
     @PostMapping
     @Operation(
             summary = "Create a notification.",
@@ -59,7 +76,7 @@ public class NotificationsController {
     @GetMapping
     @Operation(
             summary = "Find all notifications.",
-            description = "Find a list of all notifications in the system..")
+            description = "Find a list of all notifications in the system.")
     public ResponseEntity<List<NotificationsEntity>> findAll() {
         return notificationsService.findAll();
     }
